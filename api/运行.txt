@@ -1,0 +1,36 @@
+D:\python3.9\python.exe "C:/Users/说好的半岛铁盒呢/Desktop/StringLink3.0 (1)/StringLink3.0/chinese_medicine.py"
+输入文本：反复右上腹疼痛，逐渐全身黄疸，近日，64岁的广州市民李伯到广东省第二人民医院就医，医生为他先做了经皮肝穿刺胆道置管引流术，一引流还意外还有虫子在胆汁里！这才发现他还有另外一个病——华支睾吸虫病，李伯说“再也不敢乱吃这些生鱼片了，以后一定煮熟了再吃。”　　在广东省第二人民医院普外二科，李伯经过系统检验检查后被医生诊断为“胆囊结石伴胆囊炎、胆总管下段结石、胆管炎、梗阻性黄疸”，考虑到胆道的炎症时间较长、水肿比较严重暂不适合急诊手术，为缓解炎症、减轻黄疸，专家团队决定先请超声科介入团队为李伯行“经皮肝穿刺胆道置管引流术”（PTCD），再择期行“经皮穿刺胆道镜取石术”（ PTOBF）及腹腔镜胆囊切除术。
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Windows\TEMP\jieba.cache
+Loading model cost 1.152 seconds.
+Prefix dict has been built succesfully.
+['反复', '右', '上腹', '疼痛', '逐渐', '全身', '黄疸', '近日', '64', '岁', '的', '广州', '市民', '李伯到', '广东省', '第二', '人民', '医院', '就医', '医生', '为', '他', '先', '做', '了', '经皮', '肝', '穿刺', '胆道', '置管', '引流术', '一', '引流', '还', '意外', '还有', '虫子', '在', '胆汁', '里', '！', '这才', '发现', '另外', '一个', '病', '—', '华支', '睾', '吸虫病', '李伯说', '再也', '不敢', '乱', '吃', '这些', '生鱼片', '以后', '一定', '煮熟', '再', '\u3000', '普外', '二科', '李伯', '经过', '系统', '检验', '检查', '后', '被', '诊断', '胆囊结石', '伴', '胆囊炎', '胆总管', '下', '段', '结石', '胆管炎', '梗阻性', '考虑', '到', '炎症', '时间', '较长', '水肿', '比较严重', '暂', '不', '适合', '急诊', '手术', '缓解', '减轻', '专家', '团队', '决定', '先请', '超声', '科', '介入', '李伯行', 'PTCD', '择期', '行', '镜取', '石术', ' ', 'PTOBF', '及', '腹腔镜', '胆囊', '切除术']
+True
+
+D:\python3.9\python.exe "C:/Users/说好的半岛铁盒呢/Desktop/StringLink3.0 (1)/StringLink3.0/system.py"
+输入文本：反复右上腹疼痛，逐渐全身黄疸，近日，64岁的广州市民李伯到广东省第二人民医院就医，医生为他先做了经皮肝穿刺胆道置管引流术，一引流还意外还有虫子在胆汁里！这才发现他还有另外一个病——华支睾吸虫病，李伯说“再也不敢乱吃这些生鱼片了，以后一定煮熟了再吃。”　　在广东省第二人民医院普外二科，李伯经过系统检验检查后被医生诊断为“胆囊结石伴胆囊炎、胆总管下段结石、胆管炎、梗阻性黄疸”，考虑到胆道的炎症时间较长、水肿比较严重暂不适合急诊手术，为缓解炎症、减轻黄疸，专家团队决定先请超声科介入团队为李伯行“经皮肝穿刺胆道置管引流术”（PTCD），再择期行“经皮穿刺胆道镜取石术”（ PTOBF）及腹腔镜胆囊切除术。
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Windows\TEMP\jieba.cache
+Loading model cost 1.113 seconds.
+Prefix dict has been built succesfully.
+
+['消化系统']
+
+
+D:\python3.9\python.exe "C:/Users/说好的半岛铁盒呢/Desktop/StringLink3.0 (1)/StringLink3.0/HSK_level.py"
+输入文本：反复右上腹疼痛，逐渐全身黄疸，近日，64岁的广州市民李伯到广东省第二人民医院就医，医生为他先做了经皮肝穿刺胆道置管引流术，一引流还意外还有虫子在胆汁里！这才发现他还有另外一个病——华支睾吸虫病，李伯说“再也不敢乱吃这些生鱼片了，以后一定煮熟了再吃。”　　在广东省第二人民医院普外二科，李伯经过系统检验检查后被医生诊断为“胆囊结石伴胆囊炎、胆总管下段结石、胆管炎、梗阻性黄疸”，考虑到胆道的炎症时间较长、水肿比较严重暂不适合急诊手术，为缓解炎症、减轻黄疸，专家团队决定先请超声科介入团队为李伯行“经皮肝穿刺胆道置管引流术”（PTCD），再择期行“经皮穿刺胆道镜取石术”（ PTOBF）及腹腔镜胆囊切除术。
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Windows\TEMP\jieba.cache
+Loading model cost 0.997 seconds.
+Prefix dict has been built succesfully.
+[7]
+
+
+D:\python3.9\python.exe "C:/Users/说好的半岛铁盒呢/Desktop/StringLink3.0 (1)/StringLink3.0/MCT_level.py"
+输入文本：反复右上腹疼痛，逐渐全身黄疸，近日，64岁的广州市民李伯到广东省第二人民医院就医，医生为他先做了经皮肝穿刺胆道置管引流术，一引流还意外还有虫子在胆汁里！这才发现他还有另外一个病——华支睾吸虫病，李伯说“再也不敢乱吃这些生鱼片了，以后一定煮熟了再吃。”　　在广东省第二人民医院普外二科，李伯经过系统检验检查后被医生诊断为“胆囊结石伴胆囊炎、胆总管下段结石、胆管炎、梗阻性黄疸”，考虑到胆道的炎症时间较长、水肿比较严重暂不适合急诊手术，为缓解炎症、减轻黄疸，专家团队决定先请超声科介入团队为李伯行“经皮肝穿刺胆道置管引流术”（PTCD），再择期行“经皮穿刺胆道镜取石术”（ PTOBF）及腹腔镜胆囊切除术。
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Windows\TEMP\jieba.cache
+Loading model cost 0.982 seconds.
+Prefix dict has been built succesfully.
+[1]
+
