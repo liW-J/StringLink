@@ -67,9 +67,6 @@ def dig(num,Level,data,key, word,count,a,result=[],listLine=[]):
                         break
                     else:
                         data = data.replace(listLine[num], ' __' + str(count) + '__ ',1)
-                        # print(data)
-                        # print(1)
-                        # print(count)
                         key.append(listLine[num])
                         # print(key)
                         word[listLine[num]] = 0
@@ -97,7 +94,7 @@ def disturb(txt,key,T):#txt:要选词典；key:正确答案；T:随机数种子
             # print(j)
             # print(len(word))
             # newkey = word[Ran]
-            if key in j:#!!!!!应该是存在于还是完全等于
+            if key in j:#存在于还是完全等于？
                 random.seed(T)
                 Ran = random.randint(0, len(word) - 1)
                 newkey=word[Ran]
@@ -136,9 +133,9 @@ def dic(txt,count,KEY=[]):
     newkey = disturb(txt, KEY[0], time.time() + len(KEY))
     if newkey != False:
         count += 1
-        print(newkey)
+        # print(newkey)
         KEY.append(newkey)
-        print(KEY)
+        # print(KEY)
         # 直到出满3题为止
         while count != 3:
             newkey = disturb(txt, KEY[0], time.time() + len(KEY))
@@ -146,13 +143,107 @@ def dic(txt,count,KEY=[]):
             KEY.append(newkey)
     return newkey,KEY
 
-# newkey=disturb("LevelTwo.csv", key[0],time.time()+len(key))
-            # if newkey!=False:
-            #     count+=1
-            #     print(newkey)
-            #     key.append(newkey)
-            #     #直到出满3题为止
-            #     while count!=3:
-            #         newkey = disturb("LevelTwo.csv", key[0],time.time()+len(key))
-            #         count+=1
-            #         key.append(newkey)
+def department(words=[]):#科室-疾病判断
+    department = {}
+    with open("./dictionary/test.info.json", 'r', encoding='utf8', newline='') as f:
+        for line in f:
+            line = eval(line)
+            if line['department'] in department.keys():
+                department[line['department']].append(line['disease'])
+            else:
+                department[line['department']] = []
+                department[line['department']].append(line['disease'])
+    # with open("./train.info.json", 'r', encoding='utf8', newline='') as f:
+    #     for line in f:
+    #         line = eval(line)
+    #         if line['department'] in department.keys():
+    #             department[line['department']].append(line['disease'])
+    #         else:
+    #             department[line['department']] = []
+    #             department[line['department']].append(line['disease'])
+    time = {}
+    for key in department.keys():
+        time[key] = 0
+    for word in words:
+        for key in department.keys():
+            if word in department[key]:
+                time[key] += 1
+    max_values=max(time.values())
+    if max_values==0:
+        max_list=["其它"]
+    else:
+        max_list=[]
+        for m,n in time.items():
+            if n == max_values:
+                max_list.append(m)
+    # print(max_list)
+    return max_list
+
+
+def judge_HSK(level,word,FLAG):
+    nrows = len(level)
+    # print(nrows)
+    for i in range(nrows):
+        if i == 0:
+            continue
+        if word == level.iloc[i, 0]:
+            # print(level.iloc[i, 0])
+            FLAG = True
+    return FLAG
+
+def system(name,listOfStr):
+    nrows = len(name)
+    # print(listOfStr)
+    # print(nrows)
+    system = {"内分泌系统":[],"循环系统":[],"呼吸系统":[],"消化系统":[],"运动系统":[],"泌尿系统":[],"生殖系统":[]}
+    time = {"内分泌系统":0,"循环系统":0,"呼吸系统":0,"消化系统":0,"运动系统":0,"泌尿系统":0,"生殖系统":0}
+    for i in range(nrows):
+        print()
+        if i >6740 and i < 9668:
+            kind = "内分泌系统"
+            # print(kind)
+            # print(name.iloc[i,0])
+            system[kind].append(name.iloc[i,0])
+            # print(system)
+        elif i > 12336 and i < 14512:
+            kind = "循环系统"
+            system[kind].append(name.iloc[i,0])
+        elif i > 14512 and i < 15459:
+            kind = "呼吸系统"
+            system[kind].append(name.iloc[i, 0])
+        elif i > 15459 and i < 17775:
+            kind = "消化系统"
+            system[kind].append(name.iloc[i,0])
+        elif i > 18885 and i < 21085:
+            kind = "运动系统"
+            system[kind].append(name.iloc[i,0])
+        elif i > 21085 and i < 21697:
+            kind = "泌尿系统"
+            system[kind].append(name.iloc[i,0])
+        elif i > 21697 and i < 21526:
+            kind = "生殖系统"
+            system[kind].append(name.iloc[i,0])
+    systemList = []
+    for i in listOfStr:
+         for (k,v) in system.items():
+             # print(v)
+             if i in v:
+                systemList.append(k)
+         # print(systemList)
+         for i in systemList:
+             time[i]+=1
+    max_values = max(time.values())
+    if max_values == 0:
+        max_list = ["其它"]
+    else:
+        max_list = []
+        for m, n in time.items():
+            if n == max_values:
+                max_list.append(m)
+    # print(max_list)
+    return max_list
+
+
+
+
+

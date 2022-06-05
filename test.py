@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-# import csv
+import csv
 #
 # headers = ['class','name','sex','height','year']
 # #
@@ -81,24 +81,52 @@ import re
 #     if pos[0][0]=='v':
 #         print(True)
 from function import dig
-count=1
-LevelOne=0
-key=[]
-result1=["我喝"]
-listLine=["我喝"]
-word={"我喝":0}
-num=0
-data="{'history': ['患者：前表性胃炎，__ 我喝纯牛奶好不好？养胃吗（男，22岁）', '医生：平时有什么不舒服吗？如果没有特别的，不用吃药，饮食上注意就可以。纯牛奶可以的。', '患者：平时吃一碗多饭胃又涨了，平时有点痛，我每天都会喝纯牛奶的。', '医生：去做胃镜了吗？', '患者：今年没有做，还是去年做的，', '医生：恩，应该没事，如果厉害的话，可以吃点奥美拉唑。', '医生：或者可以少食多餐，易消化的食物，多运动。', '患者：为什么老是打嗝。', '医生：有可能胀气。你喝了奶后，会厉害吗？', '患者：一样的。', '医生：那你先别喝牛奶了，牛奶容易胀气。', '医生：豆类食品最好先别吃。', '医生：平时可以多喝点小米稀饭，这个养胃，吃完饭不要立刻躺下。', '患者：豆类我先不吃，牛奶还要喝的，纯牛奶喝了没事，我只对酸奶有，喝酸奶会反酸。', '医生：嗯呢，那你试试。', '患者：每次都是一个小时后才躺下了，真是遭罪。', '医生：平时吃饭，也要注意，那些吃了不舒服，以后就少吃点。', '医生：慢性胃炎，都要靠慢慢的养。', '患者：好的太慢了，人都消瘦了，']}"
-# data = data.replace(a, ' __' + str(count) + '__ ', 1)
+# count=1
+# LevelOne=0
+# key=[]
+# result1=["我喝"]
+# listLine=["我喝"]
+# word={"我喝":0}
+# num=0
+# data="{'history': ['患者：前表性胃炎，__ 我喝纯牛奶好不好？养胃吗（男，22岁）', '医生：平时有什么不舒服吗？如果没有特别的，不用吃药，饮食上注意就可以。纯牛奶可以的。', '患者：平时吃一碗多饭胃又涨了，平时有点痛，我每天都会喝纯牛奶的。', '医生：去做胃镜了吗？', '患者：今年没有做，还是去年做的，', '医生：恩，应该没事，如果厉害的话，可以吃点奥美拉唑。', '医生：或者可以少食多餐，易消化的食物，多运动。', '患者：为什么老是打嗝。', '医生：有可能胀气。你喝了奶后，会厉害吗？', '患者：一样的。', '医生：那你先别喝牛奶了，牛奶容易胀气。', '医生：豆类食品最好先别吃。', '医生：平时可以多喝点小米稀饭，这个养胃，吃完饭不要立刻躺下。', '患者：豆类我先不吃，牛奶还要喝的，纯牛奶喝了没事，我只对酸奶有，喝酸奶会反酸。', '医生：嗯呢，那你试试。', '患者：每次都是一个小时后才躺下了，真是遭罪。', '医生：平时吃饭，也要注意，那些吃了不舒服，以后就少吃点。', '医生：慢性胃炎，都要靠慢慢的养。', '患者：好的太慢了，人都消瘦了，']}"
+# # data = data.replace(a, ' __' + str(count) + '__ ', 1)
 
 # LevelOne,count,data=dig( 0, LevelOne, data, key, word,count,3, result1,listLine)
 
 
-print(data)
-a="__ "+'['+listLine[num]+']'
-print(a)
-if re.sub(a,"#",data)==data:
-    print(True)
-else:
-    print(False)
-data = data.replace(listLine[0], ' __' + str(count) + '__ ',1)
+# print(data)
+# a="__ "+'['+listLine[num]+']'
+# print(a)
+# if re.sub(a,"#",data)==data:
+#     print(True)
+# else:
+#     print(False)
+# data = data.replace(listLine[0], ' __' + str(count) + '__ ',1)
+# with open("./科室-疾病.txt", 'a', encoding='utf8', newline='') as f1:
+#     department = {}
+#     with open("./test.info.json", 'r', encoding='utf8', newline='') as f:
+#         for line in f:
+#             line = eval(line)
+#             if line['department'] in department.keys():
+#                 department[line['department']].append(line['disease'])
+#             else:
+#                 department[line['department']] = []
+#                 department[line['department']].append(line['disease'])
+#     with open("./train.info.json", 'r', encoding='utf8', newline='') as f:
+#         for line in f:
+#             line = eval(line)
+#             if line['department'] in department.keys():
+#                 department[line['department']].append(line['disease'])
+#             else:
+#                 department[line['department']] = []
+#                 department[line['department']].append(line['disease'])
+#     f_csv = csv.writer(f1)
+#     print(department)
+#     f_csv.writerow(department)
+
+try:
+    print(ss)
+except (ZeroDivisionError, NameError) as e:
+    print('出现了除0错误和访问未声明变量错误中的一种')
+except:
+    print('其他错误类型')

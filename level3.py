@@ -1,109 +1,133 @@
+#-*- coding:utf-8 -*-
 import jieba
 import csv
 import random
 from copy import deepcopy
+from function import clear,department,clearPun,dig
 
-# 导入一级二级三级词汇，可能挖空的词汇
-with open("dictionary/LevelOne.csv", "r", encoding='utf8') as file:
-    with open("dictionary/LevelTwo.csv", "r", encoding='utf8') as file1:
-        with open("dictionary/LevelTwo.csv", "r", encoding='utf8') as file3:
-            str1 = file.read()
-            str2=file1.read()
-            str3=file3.read()
-            result1 = jieba.lcut(str1)
-            result2 = jieba.lcut(str2)
-            result3=jieba.lcut(str3)
-            result1.extend(result2)
-            result1.extend(result3)
-            for i in result1:
-                if i in [' ' , '\n' ,',' , '\ufeff' , '（' , '）' , "患者"]:
-                    result1.remove(i)
-            #print (result)
-            strDict = {} #挖空的词
-            for i in result1:
-                strDict[i]=1
-            file.close()
+import random,re
+#使用等级一、等级二的文件词汇 对原文的对话 进行挖空 生成textQuestion2.txt存放挖空后的对话＋key2.csv存放挖空后的答案]
+
+strDict1,result1=clear("./dictionary/LevelOne.csv")
+strDict2,result2=clear("./dictionary/LevelTwo.csv")
+strDict3,result3=clear("./dictionary/LevelThree.csv")
+strDict1.update(strDict2)
+strDict1.update(strDict3)
+with open("./dictionary/代词.csv", "r", encoding='utf8') as file:
+    str1 = file.read()
+    Result = str1.split("\n")
+
+    for i in Result:
+        if i in [' ', '\n', ',', '\ufeff', '（', '）', "患者"]:
+            Result.remove(i)
 #对话的文本按行来挖空。
-with open("./question/textQuestion3.txt", 'a', encoding='utf8') as file2:
+with open("question/textQuestion3.txt", 'a', encoding='utf8') as file2:
     with open("原文.txt", "r", encoding='utf8') as f2:
     # 打开文件
         txt = f2.readlines()
       # key = []  # 存储挖空出来的词
         for data in txt:
+
+            count = 0
             result = jieba.lcut(data)
             key=[]
-            word = deepcopy(strDict)
+            word = deepcopy(strDict1)
             listOfStr = []  #储存原对话中的分词
             listLine = []  #需要挖空的词
-            flag = True
-            for i in result:
-                for j in ",，'\n''!。？?《》；：“”‘’【】（）、[]{}:，-/":  #删除标点符号
-                    if i==j:
-                        flag = False
-                        break
-                if flag==True and i not in listOfStr:
-                    listOfStr.append(i)
-                flag = True
-                #得到分词后地纯文本列表
+            clearPun(result, listOfStr)
+                # 得到分词后的纯文本列表
             # print(data)
             # print(listOfStr)
-            count = 0
-            for i in listOfStr:
-                for j in strDict:
+            #判断科室类别
 
+
+            with open("./中医疾病与病征编码.txt", 'r', encoding='utf8', newline='') as f:
+                txt = []
+                for line in f.readlines():
+                    curline = line.strip().split(" ")
+                    txt.append(curline[0])
+            with open("dictionary/HSK.csv", 'r', encoding='utf8', newline='') as ff:
+                words = []
+                for line in ff.readlines():
+                    curline = line.strip().split(" ")
+                    words.append(curline[0])
+            FLAG=True
+            for i in result:
+                for j in txt:
+                    if i==j:
+                        FLAG=False
+            for i in result:
+                for j in txt:
+                    if j in i:
+                        FLAG=False
+            if FLAG==False:
+                continue
+            for i in listOfStr:
+
+                for j in strDict1:
                     if i == j:
-                        listLine.append(i)  # 将在第一行出现的的挖空词汇单独拿到一个列表中.
+                        listLine.append(i)  # 将在一行出现的的挖空词汇单独拿到一个列表中.
+
             lenthOfListLine = len(listLine) #需挖空词的数量
             print(listLine)
-            # for i in range(len(listLine)):
-            #     if word[listLine[i]] == 0:
-            #             lenthOfListLine = lenthOfListLine - 1
+
             LevelOne = 0
             LevelTwo = 0
-            LevelThree=0
+            LevelThree = 0
             for num in range(lenthOfListLine):
                 if word[listLine[num]] == 0:
                     continue
                 if lenthOfListLine > 10:
-                    if LevelOne>=2 or LevelTwo>=4 or LevelThree>=5:
-                        continue
                     Ran=random.randint(0,1)
-                    if Ran==1:
-                        data = data.replace(listLine[num],  '____',1)
-                        # lenthOfListLine -= 1
-
-                        key.append(listLine[num])
-                        word[listLine[num]] = 0
-                        if listLine[num] in result1:
-                            LevelOne+=1
-                        if listLine[num] in result2:
-                            LevelTwo+=1
-                        if listLine[num] in result3:
-                            LevelThree+=1
-                    else:
-                        continue
-
-                    if LevelOne>=2 and LevelTwo>=4 and LevelThree>=5:
+                    if LevelOne>=1 and LevelTwo>=1 and LevelThree>=2:
                         break
+                    else:
+                        LevelOne,count,data=dig( num, LevelOne, data, key, word,count,1, result1,listLine)#一级词汇出2个
+                        LevelTwo,count,data=dig( num, LevelTwo, data, key, word,count,2, result2,listLine)#二级词汇出4个
+                        LevelThree, count, data = dig(num, LevelTwo, data, key, word, count, 4, result3, listLine)  # 二级词汇出4个
+                elif lenthOfListLine>0 and lenthOfListLine<=4: #如果挖空词语不超过4个，全部挖掉
+                    S = "__ " + '[' + listLine[num] + ']'
+                    if re.sub(S, "#", data) == data:
+                        flag = True
+                    else:
+                        flag = False
 
-                elif lenthOfListLine>0 and lenthOfListLine<=10:
-                    data = data.replace(listLine[num], '____', 1)
-                    # lenthOfListLine -= 1
-                    key.append(listLine[num])
-                    word[listLine[num]] = 0
-
+                    if flag == False:
+                        break
+                    else:
+                        count += 1
+                        data = data.replace(listLine[num], ' __'+str(count)+'__ ', 1)
+                        # lenthOfListLine -= 1
+                        key.append(listLine[num])
+                        for i in range(len(result1)):
+                            if listLine[num] == result1[i]:
+                                    LevelOne += 1
+                        for i in range(len(result2)):
+                            if listLine[num] == result2[i]:
+                                    LevelTwo += 1
+                        for i in range(len(result3)):
+                            if listLine[num] == result3[i]:
+                                    LevelThree += 1
+                        word[listLine[num]] = 0
                 else:
                     break
+            # print(count)
+            # print(LevelTwo)
+            # print(LevelOne)
             print(key)
-            print(LevelOne)
-            if key==[] or [] :
+            print(data)
+            if len(key)>4 or len(key)<2 :
                 continue
             else:
-                with open ("./key/key3.csv",'a',encoding='utf8',newline='') as f1:
+                with open ("key/key3.csv", 'a', encoding='utf8', newline='') as f1:
                     f_csv = csv.writer(f1)
                     f_csv.writerow(key)
                 file2.write(data)
+                depart = department(listOfStr)
+                with open("kind/kind3.csv", 'a', encoding='utf8', newline='') as f3:
+                    ff_csv = csv.writer(f3)
+                    ff_csv.writerow(depart)
             # csv_writer.writerow(key)
 f1.close()
 f2.close()
-file.close()
+
